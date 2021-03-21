@@ -1,0 +1,49 @@
+﻿@model truYum.Models.MenuItem
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>MenuItem</legend>
+        @Html.HiddenFor(model => model.ID)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name)
+            @Html.EditorFor(model => model.Name)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FreeDelivery)
+            @Html.CheckBoxFor(model => model.FreeDelivery)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price)
+            @Html.EditorFor(model => model.Price)
+        </div>
+        <div class="">
+            @Html.LabelFor(model => model.DateOfLaunch)
+            @Html.EditorFor(model => model.DateOfLaunch)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Active)
+            @Html.CheckBoxFor(model => model.Active)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Categories.Name)
+            @Html.DropDownList("Category",ViewBag.Category as SelectList)
+            @*{
+               new SelectListItem { Text = "Main Course", Value = "1",Selected=true},
+               new SelectListItem { Text = "Starters", Value = "2"},
+               new SelectListItem { Text = "Snacks", Value = "3"}
+           })*@
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" />
+        </div>
+    </fieldset>
+        @Html.ActionLink("Back to List", "Index","MenuItems")
+}

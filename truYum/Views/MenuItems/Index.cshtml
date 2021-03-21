@@ -1,0 +1,66 @@
+﻿@model IEnumerable<truYum.Models.MenuItem>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Menu Item</h2>
+@if(ViewBag.isAdmin)
+{ 
+    @Html.ActionLink("Create New", "Create")
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Active</th>
+                <th scope="col">Date Of Launch</th>
+                @*<th scope="col">Category Name</th>*@
+                <th scope="col">Free Delivery</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@Html.DisplayFor(m=>item.Name)</th>
+                    <td>@Html.DisplayFor(m => item.Price)</td>
+                    <td>@Html.CheckBoxFor(m=>item.Active)</td>
+                    <td>@Html.DisplayFor(m => item.DateOfLaunch)</td>
+                    @*<td>@ViewBag.Category</td>*@
+                    <td>@Html.DisplayFor(m => item.FreeDelivery)</td>
+                    <td>@Html.ActionLink("Edit","Edit",new { ID = item.ID }) | @Html.ActionLink("Delete","Delete",new { ID = item.ID })</td>
+                </tr>
+            }
+
+    </tbody>
+</table>
+}
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Free Delivery</th>
+            <th scope="col">Price</th>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+        <tr>
+            <th scope="row">@Html.DisplayFor(m => item.Name)</th>
+            <td>@Html.DisplayFor(m => item.FreeDelivery)</td>
+            <td>@Html.DisplayFor(m => item.Price)</td>
+            <td>@Html.DisplayFor(m => item.Categories)</td>
+            <td>@Html.ActionLink("Add to Cart", "Cart", new { ID = @item.ID })</td>
+        </tr>
+            }
+
+    </tbody>
+</table>
+}

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<truYum.Controllers.MenuItemsController.CartList>
+@{
+    ViewBag.Title = "ViewCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewCart</h2>
+@if(ViewBag.Empty==false)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th>
+                @Html.DisplayName("FreeDelivery")
+            </th>
+            <th>
+                @Html.DisplayName("Price")
+            </th>
+
+            <th>@Html.DisplayName("Action")</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FreeDelivery)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.ActionLink("Remove", "Delete", new { id = item.CartId })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h4>No Items in Cart.</h4>
+}
+@Html.ActionLink("View Menu Items", "Index", "MenuItems")

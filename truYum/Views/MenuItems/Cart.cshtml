@@ -1,0 +1,29 @@
+﻿@model IEnumerable<truYum.Models.MenuItem>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Cart</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Free Delivery</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@Html.DisplayFor(m => @item.Name)</th>
+                <td>@Html.DisplayFor(m => @item.FreeDelivery)</td>
+                <td>@Html.DisplayFor(m => @item.Price)</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { ID = @item.ID })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.ActionLink("View Menu Items", "Index", "MenuItems")
